@@ -1,24 +1,22 @@
-import 'dart:ui';
-import 'package:flutter/cupertino.dart';
 import 'dart:async';
+import 'dart:ui';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_my_bakery/models/models.dart';
 import 'package:flutter_my_bakery/screens/tezgahtar/edit.dart';
+import 'package:flutter_my_bakery/services/crud.dart';
+import 'package:intl/intl.dart';
 import 'package:outline_material_icons/outline_material_icons.dart';
 import 'package:share/share.dart';
-import 'package:flutter_my_bakery/services/crud.dart';
 
 class ViewNotePage extends StatefulWidget {
-  Function() triggerRefetch;
-  NotesModel currentNote;
-  ViewNotePage({Key key, Function() triggerRefetch, NotesModel currentNote})
-      : super(key: key) {
-    this.triggerRefetch = triggerRefetch;
-    this.currentNote = currentNote;
-  }
+  final Function() triggerRefetch;
+  final NotesModel currentNote;
+  ViewNotePage({Key key, this.triggerRefetch, this.currentNote})
+      : super(key: key);
   @override
   _ViewNotePageState createState() => _ViewNotePageState();
 }
@@ -209,14 +207,10 @@ class _ViewNotePageState extends State<ViewNotePage> {
 }
 
 class ViewExpensePage extends StatefulWidget {
-  Function() triggerRefetch;
-  ExpensesModel currentExpense;
-  ViewExpensePage(
-      {Key key, Function() triggerRefetch, ExpensesModel currentExpense})
-      : super(key: key) {
-    this.triggerRefetch = triggerRefetch;
-    this.currentExpense = currentExpense;
-  }
+  final Function() triggerRefetch;
+  final ExpensesModel currentExpense;
+  ViewExpensePage({Key key, this.triggerRefetch, this.currentExpense})
+      : super(key: key);
   @override
   _ViewExpensePageState createState() => _ViewExpensePageState();
 }
@@ -327,7 +321,6 @@ class _ViewExpensePageState extends State<ViewExpensePage> {
   }
 
   void handleSave() async {
-    var temp = widget.currentExpense.id;
     //print("uid: " + temp + "-----------------------");
     service.updateExpense(
         widget.currentExpense.id, widget.currentExpense.toMap());
@@ -396,14 +389,10 @@ class _ViewExpensePageState extends State<ViewExpensePage> {
 }
 
 class ViewVeresiyePage extends StatefulWidget {
-  Function() triggerRefetch;
-  VeresiyeModel currentVeresiye;
-  ViewVeresiyePage(
-      {Key key, Function() triggerRefetch, VeresiyeModel currentVeresiye})
-      : super(key: key) {
-    this.triggerRefetch = triggerRefetch;
-    this.currentVeresiye = currentVeresiye;
-  }
+  final Function() triggerRefetch;
+  final VeresiyeModel currentVeresiye;
+  ViewVeresiyePage({Key key, this.triggerRefetch, this.currentVeresiye})
+      : super(key: key);
   @override
   _ViewVeresiyePageState createState() => _ViewVeresiyePageState();
 }
@@ -514,7 +503,8 @@ class _ViewVeresiyePageState extends State<ViewVeresiyePage> {
 
   void handleSave() async {
     // await NotesDatabaseService.db.updateVeresiyeInDB(widget.currentVeresiye);
-    service.updateVeresiye(widget.currentVeresiye.title, widget.currentVeresiye.toMap());
+    service.updateVeresiye(
+        widget.currentVeresiye.title, widget.currentVeresiye.toMap());
     widget.triggerRefetch();
   }
 

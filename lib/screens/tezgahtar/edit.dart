@@ -1,22 +1,20 @@
 import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/painting.dart' as prefix0;
 import 'package:flutter/widgets.dart';
 import 'package:flutter_my_bakery/models/models.dart';
+import 'package:flutter_my_bakery/screens/tezgahtar/field_test.dart';
 import 'package:flutter_my_bakery/services/crud.dart';
 import 'package:uuid/uuid.dart';
-import 'package:flutter_my_bakery/screens/tezgahtar/field_test.dart';
 
 class EditNotePage extends StatefulWidget {
-  Function() triggerRefetch;
-  NotesModel existingNote;
-  EditNotePage({Key key, Function() triggerRefetch, NotesModel existingNote})
-      : super(key: key) {
-    this.triggerRefetch = triggerRefetch;
-    this.existingNote = existingNote;
-  }
+  final Function() triggerRefetch;
+  final NotesModel existingNote;
+  EditNotePage({Key key, this.triggerRefetch, this.existingNote})
+      : super(key: key);
   @override
   _EditNotePageState createState() => _EditNotePageState();
 }
@@ -208,7 +206,7 @@ class _EditNotePageState extends State<EditNotePage> {
   }
 
   void markTitleAsDirty(String title) {
-    if (fieldTest.noteValidator(title) == null)
+    if (FieldTest.noteValidator(title) == null)
       setState(() {
         isDirtyTitle = true;
       });
@@ -219,7 +217,7 @@ class _EditNotePageState extends State<EditNotePage> {
   }
 
   void markContentAsDirty(String content) {
-    if (fieldTest.noteValidator(content) == null)
+    if (FieldTest.noteValidator(content) == null)
       setState(() {
         isDirtyContent = true;
       });
@@ -284,14 +282,11 @@ class _EditNotePageState extends State<EditNotePage> {
 }
 
 class EditExpensePage extends StatefulWidget {
-  Function() triggerRefetch;
-  ExpensesModel existingExpense;
-  EditExpensePage(
-      {Key key, Function() triggerRefetch, ExpensesModel existingExpense})
-      : super(key: key) {
-    this.triggerRefetch = triggerRefetch;
-    this.existingExpense = existingExpense;
-  }
+  final Function() triggerRefetch;
+  final ExpensesModel existingExpense;
+  EditExpensePage({Key key, this.triggerRefetch, this.existingExpense})
+      : super(key: key);
+
   @override
   _EditExpensePageState createState() => _EditExpensePageState();
 }
@@ -470,7 +465,7 @@ class _EditExpensePageState extends State<EditExpensePage> {
   }
 
   void markTitleAsDirty(String title) {
-    if (fieldTest.expenseTitleValidator(title) == null)
+    if (FieldTest.expenseTitleValidator(title) == null)
       setState(() {
         isDirtyTitle = true;
       });
@@ -481,7 +476,7 @@ class _EditExpensePageState extends State<EditExpensePage> {
   }
 
   void markContentAsDirty(String content) {
-    if (fieldTest.expenseContentValidator(content) == null)
+    if (FieldTest.expenseContentValidator(content) == null)
       setState(() {
         isDirtyContent = true;
       });
@@ -541,14 +536,13 @@ class _EditExpensePageState extends State<EditExpensePage> {
 }
 
 class EditVeresiyePage extends StatefulWidget {
-  Function() triggerRefetch;
-  VeresiyeModel existingVeresiye;
-  EditVeresiyePage(
-      {Key key, Function() triggerRefetch, VeresiyeModel existingVeresiye})
-      : super(key: key) {
-    this.triggerRefetch = triggerRefetch;
-    this.existingVeresiye = existingVeresiye;
-  }
+  final Function() triggerRefetch;
+  final VeresiyeModel existingVeresiye;
+  EditVeresiyePage({
+    Key key,
+    this.triggerRefetch,
+    this.existingVeresiye,
+  }) : super(key: key);
   @override
   _EditVeresiyePageState createState() => _EditVeresiyePageState();
 }
@@ -564,7 +558,6 @@ class _EditVeresiyePageState extends State<EditVeresiyePage> {
   TextEditingController titleController = TextEditingController();
   TextEditingController contentController = TextEditingController();
   DatabaseService service = DatabaseService();
-  GlobalKey<FormState> _key = new GlobalKey();
 
   @override
   void initState() {
@@ -726,7 +719,7 @@ class _EditVeresiyePageState extends State<EditVeresiyePage> {
   }
 
   void markTitleAsDirty(String title) {
-    if (fieldTest.veresiyeTitleValidator(title) == null)
+    if (FieldTest.veresiyeTitleValidator(title) == null)
       setState(() {
         titleIsDirty = true;
       });
@@ -737,7 +730,7 @@ class _EditVeresiyePageState extends State<EditVeresiyePage> {
   }
 
   void markContentAsDirty(String content) {
-    if (fieldTest.veresiyeContentValidator(content) == null)
+    if (FieldTest.veresiyeContentValidator(content) == null)
       setState(() {
         contentIsDirty = true;
       });

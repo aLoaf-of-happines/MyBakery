@@ -21,7 +21,6 @@ class Veresiye2 extends StatefulWidget {
 }
 
 class _Veresiye2State extends State<Veresiye2> {
-  GlobalKey<FormState> _key = new GlobalKey();
   bool headerShouldHide = false;
   List<VeresiyeModel> veresiyeList = [];
   TextEditingController searchController = TextEditingController();
@@ -194,6 +193,7 @@ class _Veresiye2State extends State<Veresiye2> {
     return veresiyeComponentsList;
   }
 
+  // ignore: unused_element
   _showDialog(VeresiyeModel veresiye) {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       showDialog(

@@ -1,7 +1,6 @@
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_my_bakery/screens/administrator/products.dart';
 import 'package:flutter_my_bakery/screens/administrator/employees.dart';
+import 'package:flutter_my_bakery/screens/administrator/products.dart';
 import 'package:flutter_my_bakery/screens/administrator/reports.dart';
 import 'package:flutter_my_bakery/screens/service/service_main.dart';
 import 'package:flutter_my_bakery/screens/tezgahtar/tezgahtar.dart';
@@ -32,7 +31,12 @@ class _HomeState extends State<Home> {
     int sum = 0;
 
     String currentTime = dateFormat1.format(DateTime.now());
-    service.bakeryRef.child("dailyData").child(currentTime).child("producedBreads").onValue.listen((event){
+    service.bakeryRef
+        .child("dailyData")
+        .child(currentTime)
+        .child("producedBreads")
+        .onValue
+        .listen((event) {
       var snapshot = event.snapshot;
       Map value = snapshot.value;
 
@@ -42,7 +46,7 @@ class _HomeState extends State<Home> {
           ////print('Value is $xx');
           sum += int.parse(xx);
         });
-      } catch(e) {
+      } catch (e) {
         sum = 0;
       }
       setState(() {
@@ -51,20 +55,29 @@ class _HomeState extends State<Home> {
       });
     });
 
-    service.bakeryRef.child("dailyData").child(currentTime).onValue.listen((event){
+    service.bakeryRef
+        .child("dailyData")
+        .child(currentTime)
+        .onValue
+        .listen((event) {
       var snapshot = event.snapshot;
       Map value = snapshot.value;
 
       try {
         dagitimdaSatilanEkmek = int.parse(value["delivered"]);
         _kalan = toplamCikanEkmek - dagitimdaSatilanEkmek;
-      } catch(e){
+      } catch (e) {
         dagitimdaSatilanEkmek = 0;
         _kalan = 0;
       }
     });
 
-    service.bakeryRef.child("dailyData").child(currentTime).child("tx").onValue.listen((event){
+    service.bakeryRef
+        .child("dailyData")
+        .child(currentTime)
+        .child("tx")
+        .onValue
+        .listen((event) {
       double sumNakit = 0;
       double sumKrediKarti = 0;
       Map x = event.snapshot.value;
@@ -80,7 +93,7 @@ class _HomeState extends State<Home> {
         vitrindenToplamSatisTutari = sumNakit;
         krediKartiSatisTutari = sumKrediKarti;
         kasadaOlmasiGerekenTutar = sumNakit + (_kalan * 1.75);
-      } catch(e){
+      } catch (e) {
         vitrindenToplamSatisTutari = 0;
         krediKartiSatisTutari = 0;
         kasadaOlmasiGerekenTutar = 0;
@@ -106,7 +119,13 @@ class _HomeState extends State<Home> {
               child: Column(
                 children: [
                   SizedBox(height: size1),
-                  myBox2(context,toplamCikanEkmek,dagitimdaSatilanEkmek,vitrindenToplamSatisTutari,krediKartiSatisTutari,kasadaOlmasiGerekenTutar),
+                  myBox2(
+                      context,
+                      toplamCikanEkmek,
+                      dagitimdaSatilanEkmek,
+                      vitrindenToplamSatisTutari,
+                      krediKartiSatisTutari,
+                      kasadaOlmasiGerekenTutar),
                   SizedBox(height: size1),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -150,7 +169,15 @@ class _HomeState extends State<Home> {
                             size: iconSize,
                           ),
                           "Raporlar",
-                          Reports(toplamCikanEkmek: toplamCikanEkmek,dagitimdaSatilanEkmek: dagitimdaSatilanEkmek,toplamKalanEkmek: toplamKalanEkmek,vitrindenToplamSatisTutari: vitrindenToplamSatisTutari,krediKartiSatisTutari: krediKartiSatisTutari,kasadaOlmasiGerekenTutar: kasadaOlmasiGerekenTutar,)),
+                          Reports(
+                            toplamCikanEkmek: toplamCikanEkmek,
+                            dagitimdaSatilanEkmek: dagitimdaSatilanEkmek,
+                            toplamKalanEkmek: toplamKalanEkmek,
+                            vitrindenToplamSatisTutari:
+                                vitrindenToplamSatisTutari,
+                            krediKartiSatisTutari: krediKartiSatisTutari,
+                            kasadaOlmasiGerekenTutar: kasadaOlmasiGerekenTutar,
+                          )),
                       SizedBox(width: size1),
                       myBox(
                           context,
@@ -215,7 +242,13 @@ Widget myBox(BuildContext context, Icon icon, String string, Widget function) {
   );
 }
 
-Widget myBox2(BuildContext context, int toplamCikanEkmek, int dagitimdaSatilanEkmek, double vitrindenToplamSatisTutari, double krediKartiSatisTutari, double kasadaOlmasiGerekenTutar) {
+Widget myBox2(
+    BuildContext context,
+    int toplamCikanEkmek,
+    int dagitimdaSatilanEkmek,
+    double vitrindenToplamSatisTutari,
+    double krediKartiSatisTutari,
+    double kasadaOlmasiGerekenTutar) {
   double size1 = MediaQuery.of(context).size.height / 30;
   double size2 = MediaQuery.of(context).size.height / 40;
 
@@ -254,7 +287,16 @@ Widget myBox2(BuildContext context, int toplamCikanEkmek, int dagitimdaSatilanEk
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Reports(toplamCikanEkmek: toplamCikanEkmek,dagitimdaSatilanEkmek: dagitimdaSatilanEkmek,toplamKalanEkmek: 0,vitrindenToplamSatisTutari: vitrindenToplamSatisTutari,krediKartiSatisTutari: krediKartiSatisTutari,kasadaOlmasiGerekenTutar: kasadaOlmasiGerekenTutar,)),
+                  MaterialPageRoute(
+                      builder: (context) => Reports(
+                            toplamCikanEkmek: toplamCikanEkmek,
+                            dagitimdaSatilanEkmek: dagitimdaSatilanEkmek,
+                            toplamKalanEkmek: 0,
+                            vitrindenToplamSatisTutari:
+                                vitrindenToplamSatisTutari,
+                            krediKartiSatisTutari: krediKartiSatisTutari,
+                            kasadaOlmasiGerekenTutar: kasadaOlmasiGerekenTutar,
+                          )),
                 );
               },
               shape: RoundedRectangleBorder(

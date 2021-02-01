@@ -1,18 +1,18 @@
 import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:flutter_my_bakery/shared/faderoute.dart';
 import 'package:flutter_my_bakery/models/models.dart';
 import 'package:flutter_my_bakery/screens/tezgahtar/edit.dart';
-import 'package:flutter_my_bakery/screens/tezgahtar/view.dart';
-import 'package:flutter_my_bakery/shared/cards.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
-import 'package:flutter_my_bakery/shared/constants.dart';
-import 'package:flutter_my_bakery/services/crud.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_my_bakery/screens/tezgahtar/field_test.dart';
+import 'package:flutter_my_bakery/screens/tezgahtar/view.dart';
+import 'package:flutter_my_bakery/services/crud.dart';
+import 'package:flutter_my_bakery/shared/cards.dart';
+import 'package:flutter_my_bakery/shared/constants.dart';
+import 'package:flutter_my_bakery/shared/faderoute.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Veresiye extends StatefulWidget {
   Veresiye({Key key, this.title}) : super(key: key);
@@ -193,7 +193,7 @@ class _VeresiyeState extends State<Veresiye> {
                   controller: controller,
                   keyboardType: TextInputType.number,
                   style: textStyle1,
-                  validator: fieldTest.veresiyeContentValidator,
+                  validator: FieldTest.veresiyeContentValidator,
                 ),
               ],
             )),
@@ -234,7 +234,6 @@ class _VeresiyeState extends State<Veresiye> {
                             (double.parse(controller.value.text)))
                         .toString();
                     service.updateVeresiye(veresiye.title, veresiye.toMap());
-                    ;
                   }
                 });
                 Navigator.pop(context);

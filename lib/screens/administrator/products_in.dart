@@ -8,7 +8,7 @@ import 'package:rflutter_alert/rflutter_alert.dart';
 String uid;
 
 class ProductsIn extends StatefulWidget {
-  String category;
+  final String category;
 
   ProductsIn({Key key, this.category}) : super(key: key);
 

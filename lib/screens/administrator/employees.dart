@@ -272,6 +272,7 @@ class _EmployeesState extends State<Employees> {
                         job: controller2.value.text,
                         password: passwd.toString());
                     service.addWorker(newWorker);
+                    // ignore: deprecated_member_use_from_same_package
                     service.registerWorkers();
                   } else {
                     final newWorker = Worker(

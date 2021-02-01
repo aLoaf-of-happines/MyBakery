@@ -1,4 +1,5 @@
-class fieldTest {
+class FieldTest {
+  // ignore: missing_return
   static String veresiyeContentValidator(String text) {
     //print("inside validator");
     if (text.isEmpty) return "Miktar kısmı boş bırakılamaz!";
@@ -8,10 +9,12 @@ class fieldTest {
     if (!regex.hasMatch(text)) return "Miktar bilgisi numerik olmalıdır!";
   }
 
+  // ignore: missing_return
   static String veresiyeTitleValidator(String text) {
     if (text.isEmpty) return "Veresiye Sahibi bilgisi boş bırakılamaz!";
   }
 
+  // ignore: missing_return
   static String expenseTitleValidator(String text) {
     //print("inside validator");
     if (text.isEmpty) return "Gider kısmı boş bırakılamaz!";
@@ -24,10 +27,12 @@ class fieldTest {
     }
   }
 
+  // ignore: missing_return
   static String expenseContentValidator(String text) {
     if (text.isEmpty) return "Not bilgisi boş bırakılamaz!";
   }
 
+  // ignore: missing_return
   static String noteValidator(String text) {
     if (text.isEmpty) return "Not bilgisi boş bırakılamaz!";
   }
