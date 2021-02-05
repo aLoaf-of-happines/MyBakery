@@ -8,9 +8,9 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 class Sepet extends StatefulWidget {
-  List product;
-  List price;
-  List piece;
+  final List product;
+  final List price;
+  final List piece;
   Sepet({Key key, this.product, this.price, this.piece}) : super(key: key);
 
   @override
@@ -359,7 +359,7 @@ class _SepetState extends State<Sepet> {
     //    piece
 
     Map<dynamic, dynamic> res = {};
-    List<Map<dynamic, dynamic>> tx = List();
+    List<Map<dynamic, dynamic>> tx = [];
     for (int i = 0; i < product.length; i++) {
       // //print(product[i].toString());
       // //print(price[i] * 1.0 is double);

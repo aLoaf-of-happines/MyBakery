@@ -3,8 +3,8 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_my_bakery/models/Category.dart';
 import 'package:flutter_my_bakery/models/Market.dart';
 import 'package:flutter_my_bakery/models/Payer.dart';
-import 'package:flutter_my_bakery/models/Worker.dart';
 import 'package:flutter_my_bakery/models/Product.dart';
+import 'package:flutter_my_bakery/models/Worker.dart';
 import 'package:flutter_my_bakery/services/auth.dart';
 import 'package:mailer/mailer.dart';
 import 'package:mailer/smtp_server.dart';
@@ -112,12 +112,12 @@ class DatabaseService {
             ..html = "<p>My Bakery giriş şifreniz: ${value['passwd']}</p>";
 
           try {
-            final sendReport = await send(message, smtpServer);
+            await send(message, smtpServer);
             //print('Message sent: ' + sendReport.toString());
           } on MailerException catch (e) {
             //print('Message not sent.');
             for (var p in e.problems) {
-              //print('Problem: ${p.code}: ${p.msg}');
+              print('Problem: ${p.code}: ${p.msg}');
             }
           }
         }

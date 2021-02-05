@@ -35,10 +35,6 @@ class _OdemeState extends State<Odeme> {
     final sizeW = contextW / 20;
     final sizeH = contextH / 20;
 
-    var image = Image(image: AssetImage('assets/images/icons/'));
-
-    TextEditingController controller = TextEditingController();
-
     return StreamBuilder<Event>(
       stream: service.categoryReference.onValue,
       builder: (context, snapshot) {

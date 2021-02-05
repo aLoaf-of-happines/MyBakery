@@ -2,18 +2,18 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/screens/tezgahtar/sepet.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
-import 'package:rflutter_alert/rflutter_alert.dart';
 import 'package:flutter_my_bakery/shared/constants.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
 
 String uid;
 int indirim = 0;
 
-List product = List();
-List price = List();
-List piece = List();
+List product = [];
+List price = [];
+List piece = [];
 
 class OdemeKategori extends StatefulWidget {
-  String category;
+  final String category;
 
   OdemeKategori({Key key, this.category}) : super(key: key);
 

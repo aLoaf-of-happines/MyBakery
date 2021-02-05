@@ -8,12 +8,9 @@ import 'package:flutter_my_bakery/screens/service/service_main.dart';
 import 'package:flutter_my_bakery/screens/setup/firstPage.dart';
 import 'package:flutter_my_bakery/screens/tezgahtar/tezgahtar.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
-import 'package:flutter_my_bakery/shared/loading.dart';
 
 String role;
 Map bakery;
-
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -45,15 +42,8 @@ class _MainScreenState extends State<MainScreen> {
   DatabaseService service = DatabaseService('bakery');
 
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-
-  }
-
-  @override
   Widget build(BuildContext context) {
-    service.bakeryReference.onValue.listen((event){
+    service.bakeryReference.onValue.listen((event) {
       Map value = event.snapshot.value;
       setState(() {
         bakery = value;
@@ -61,14 +51,15 @@ class _MainScreenState extends State<MainScreen> {
       //print(value);
     });
 
-
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
         builder: (context, AsyncSnapshot<User> snapshot) {
           ////print(length);
           if (snapshot.hasData && snapshot.data != null) {
+            // ignore: deprecated_member_use
             Firestore.instance
                 .collection('users')
+                // ignore: deprecated_member_use
                 .document(snapshot.data.uid)
                 .get()
                 .then((DocumentSnapshot snapshot2) {
@@ -82,28 +73,28 @@ class _MainScreenState extends State<MainScreen> {
 
             //print(bakery);
 
-            if(role == "Yönetici" ||
+            if (role == "Yönetici" ||
                 role == "Yonetici" ||
                 role == "yönetici" ||
-                role == "yonetici"){
-              if(bakery == null){
+                role == "yonetici") {
+              if (bakery == null) {
                 return FirstPage();
-              } else if(bakery != null){
+              } else if (bakery != null) {
                 return BottomBarState();
               }
             } else if (role == "Tezgahtar" || role == "tezgahtar") {
-              if(bakery == null){
+              if (bakery == null) {
                 return FirstPage();
-              } else if(bakery != null){
+              } else if (bakery != null) {
                 return Tezgahtar();
               }
-            } else if(role == "Şoför" ||
+            } else if (role == "Şoför" ||
                 role == "Soför" ||
                 role == "Şofor" ||
-                role == "Sofor"){
-              if(bakery == null){
+                role == "Sofor") {
+              if (bakery == null) {
                 return FirstPage();
-              } else if(bakery != null){
+              } else if (bakery != null) {
                 return Service();
               }
             }
@@ -112,9 +103,12 @@ class _MainScreenState extends State<MainScreen> {
         });
   }
 
+  // ignore: missing_return
   String getRole(String docID) {
+    // ignore: deprecated_member_use
     Firestore.instance
         .collection('users')
+        // ignore: deprecated_member_use
         .document(docID)
         .get()
         .then((DocumentSnapshot snapshot) {

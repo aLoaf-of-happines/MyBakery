@@ -99,12 +99,16 @@ class _ServiceState extends State<Service> {
                         label: Text(
                           "Exit",
                           style: TextStyle(
-                              color: Colors.blueGrey[100], fontFamily: "Poppins"),
+                              color: Colors.blueGrey[100],
+                              fontFamily: "Poppins"),
                         ),
                         onPressed: () async {
                           setState(() => loading = true);
                           dynamic result = await _auth.signOut();
-                          Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignIn()), (route) => false);
+                          Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(builder: (context) => SignIn()),
+                              (route) => false);
                           if (result == null) {
                             setState(() {
                               loading = false;
@@ -148,6 +152,7 @@ class _ServiceState extends State<Service> {
                               ),
                               color: Colors.indigo,
                               onPressed: () async {
+                                // ignore: await_only_futures
                                 await _selectDate(context);
                                 setState(() {});
                               },
