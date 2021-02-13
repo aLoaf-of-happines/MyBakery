@@ -2,12 +2,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_my_bakery/screens/authenticate/sign_in.dart';
-import 'package:flutter_my_bakery/screens/home/bottom_bar_state.dart';
-import 'package:flutter_my_bakery/screens/service/service_main.dart';
-import 'package:flutter_my_bakery/screens/setup/firstPage.dart';
-import 'package:flutter_my_bakery/screens/tezgahtar/tezgahtar.dart';
-import 'package:flutter_my_bakery/services/databaseService.dart';
+
+import 'screens/authenticate/sign_in.dart';
+import 'screens/home/bottom_bar_state.dart';
+import 'screens/service/service_main.dart';
+import 'screens/setup/firstPage.dart';
+import 'screens/tezgahtar/tezgahtar.dart';
+import 'services/databaseService.dart';
 
 String role;
 Map bakery;
