@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/screens/authenticate/sign_in.dart';
 import 'package:flutter_my_bakery/services/auth.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
-import 'package:flutter_my_bakery/shared/bottom_bar.dart';
 import 'package:flutter_my_bakery/shared/loading.dart';
 import 'package:flutter_my_bakery/shared/states.dart' as states;
 
@@ -33,7 +32,7 @@ class _BottomBarStateState extends State<BottomBarState> {
             appBar: AppBar(
               automaticallyImplyLeading: false,
               title: Text(
-                "bakery",
+                "İslam Unlu Mamülleri",
                 style: TextStyle(fontFamily: "Poppins"),
               ),
               centerTitle: true,
@@ -42,17 +41,20 @@ class _BottomBarStateState extends State<BottomBarState> {
                 FlatButton.icon(
                   icon: Icon(
                     Icons.exit_to_app,
-                    color: Colors.blueGrey[100],
+                    color: Colors.white,
                   ),
                   label: Text(
-                    "Exit",
-                    style: TextStyle(
-                        color: Colors.blueGrey[100], fontFamily: "Poppins"),
+                    "Çıkış",
+                    style:
+                        TextStyle(color: Colors.white, fontFamily: "Poppins"),
                   ),
                   onPressed: () async {
                     setState(() => loading = true);
                     dynamic result = await _auth.signOut();
-                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignIn()), (route) => false);
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => SignIn()),
+                        (route) => false);
                     if (result == null) {
                       setState(() {
                         loading = false;
@@ -63,8 +65,6 @@ class _BottomBarStateState extends State<BottomBarState> {
               ],
             ),
             body: _children[_currentIndex],
-            bottomNavigationBar:
-                myBottomNavigationBar(_currentIndex, onTappedBar),
           );
   }
 }

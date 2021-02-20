@@ -7,14 +7,12 @@ import '../../widgets/NewPayer.dart';
 
 class Payers extends StatefulWidget {
   final List<Payer> list;
-  final String bakeryName;
-  Payers({this.list, this.bakeryName});
+  Payers({this.list});
   @override
-  _PayersState createState() => _PayersState(list, bakeryName);
+  _PayersState createState() => _PayersState(list);
 }
 
 class _PayersState extends State<Payers> {
-  String bakeryName;
   DatabaseService sv;
   List<Payer> payerList = [];
   void _addNewPayer(String prName, double prAmount) {
@@ -25,10 +23,9 @@ class _PayersState extends State<Payers> {
     });
   }
 
-  _PayersState(List<Payer> payers, String bakery) {
+  _PayersState(List<Payer> payers) {
     payerList = payers;
-    bakeryName = bakery;
-    sv = DatabaseService(bakery);
+    sv = DatabaseService('bakery');
   }
 
   void _startAddNewpayer(BuildContext ctx) {

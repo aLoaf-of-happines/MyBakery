@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
 import 'dart:math';
 
-List<Color> colorList = [Colors.red,Colors.purple,Colors.teal,Colors.indigo];
+List<Color> colorList = [Colors.red, Colors.purple, Colors.teal, Colors.indigo];
 
 var rng = new Random();
 var randomNum = rng.nextInt(3);
@@ -26,37 +26,39 @@ class _MyBusinessesState extends State<MyBusinesses> {
 
     return StreamBuilder<Event>(
       stream: service.bakeryReference.onValue,
-      builder: (context,snapshot){
+      builder: (context, snapshot) {
         Map data = {};
         List item = [];
 
-        if(snapshot.hasData) {
+        if (snapshot.hasData) {
           data = snapshot.data.snapshot.value;
-          if(data == null){
+          if (data == null) {
             return Scaffold(
               appBar: AppBar(
-                title: Text("Employees",style: TextStyle(fontFamily: "Poppins"),),
+                title: Text(
+                  "Çalışanlar",
+                  style: TextStyle(fontFamily: "Poppins"),
+                ),
                 centerTitle: true,
                 backgroundColor: Colors.blueGrey,
               ),
             );
           }
-          data.forEach(
-                  (index, data) => item.add({"key": index, ...data}));
+          data.forEach((index, data) => item.add({"key": index, ...data}));
         }
 
-        if (snapshot.hasError)
-          return new Text('Error: ${snapshot.error}');
-        switch (snapshot.connectionState){
+        if (snapshot.hasError) return new Text('Error: ${snapshot.error}');
+        switch (snapshot.connectionState) {
           case ConnectionState.waiting:
-            return  Container(
+            return Container(
               height: 200.0,
               alignment: Alignment.center,
               child: CircularProgressIndicator(
                 valueColor: AlwaysStoppedAnimation<Color>(Colors.black45),
               ),
             );
-          default: return ListView.builder(
+          default:
+            return ListView.builder(
               itemCount: item.length,
               itemBuilder: (context, index) {
                 return ListTile(
@@ -67,9 +69,15 @@ class _MyBusinessesState extends State<MyBusinesses> {
                       maxWidth: sizeW + 20,
                       maxHeight: sizeH + 20,
                     ),
-                    child: Icon(Icons.store,color: colorList[randomNum],),
+                    child: Icon(
+                      Icons.store,
+                      color: colorList[randomNum],
+                    ),
                   ),
-                  title: Text(item[index]["key"],style: TextStyle(fontFamily: "Poppins"),),
+                  title: Text(
+                    item[index]["key"],
+                    style: TextStyle(fontFamily: "Poppins"),
+                  ),
                 );
               },
             );
