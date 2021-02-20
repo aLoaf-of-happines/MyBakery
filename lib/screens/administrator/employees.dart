@@ -1,5 +1,4 @@
 import 'dart:math';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/models/Worker.dart';
@@ -47,7 +46,7 @@ class _EmployeesState extends State<Employees> {
             return Scaffold(
               appBar: AppBar(
                 title: Text(
-                  "Employees",
+                  "Çalışanlar",
                   style: TextStyle(fontFamily: "Poppins"),
                 ),
                 centerTitle: true,
@@ -79,7 +78,7 @@ class _EmployeesState extends State<Employees> {
             return Scaffold(
               appBar: AppBar(
                 title: Text(
-                  "Employees",
+                  "Çalışanlar",
                   style: TextStyle(fontFamily: "Poppins"),
                 ),
                 centerTitle: true,

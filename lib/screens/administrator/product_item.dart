@@ -1,22 +1,46 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_my_bakery/models/Product.dart';
 import 'package:flutter_my_bakery/screens/setup/urunler.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
-import '../models/Product.dart';
 
-class CategoryItem extends StatefulWidget {
+class ProductItem extends StatefulWidget {
   final String name;
   final String image;
 
-  CategoryItem(this.name, this.image);
+  ProductItem(this.name, this.image);
 
   @override
-  _CategoryItemState createState() => _CategoryItemState();
+  ProductItemState createState() => ProductItemState();
 }
 
-class _CategoryItemState extends State<CategoryItem> {
+class ProductItemState extends State<ProductItem> {
   DatabaseService service = DatabaseService('bakery');
-  List<Product> liste = [];
   void goProduct(BuildContext cx) async {
+    List<Product> liste = [];
+    await service.categoryReference
+        .child(widget.name)
+        .once()
+        .then((DataSnapshot snapshot) {
+      Map map = snapshot.value;
+      if (map != null) {
+        map.forEach((key, value) {
+          bool isEqual = false;
+          liste.forEach((element) {
+            if (element.name == value['name']) {
+              isEqual = true;
+            }
+          });
+
+          if (isEqual == false) {
+            liste.add(Product(
+                name: value['name'],
+                amount: value['price'].toDouble(),
+                category: widget.name));
+          }
+        });
+      }
+    });
 
     Navigator.of(cx).push(
       MaterialPageRoute(

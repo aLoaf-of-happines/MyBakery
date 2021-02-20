@@ -135,6 +135,7 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.local_shipping,
                             size: iconSize,
+                            color: Color(0xffb7410e),
                           ),
                           "Şoför",
                           Service()),
@@ -142,8 +143,9 @@ class _HomeState extends State<Home> {
                       myBox(
                           context,
                           Icon(
-                            Icons.bubble_chart,
+                            Icons.tablet_mac,
                             size: iconSize,
+                            color: Colors.purple,
                           ),
                           "Tezgahtar",
                           Tezgahtar()),
@@ -153,6 +155,7 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.fastfood,
                             size: iconSize,
+                            color: Colors.green,
                           ),
                           "Ürünler",
                           Products()),
@@ -167,6 +170,7 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.file_copy,
                             size: iconSize,
+                            color: Colors.blue,
                           ),
                           "Raporlar",
                           Reports(
@@ -184,6 +188,7 @@ class _HomeState extends State<Home> {
                           Icon(
                             Icons.people,
                             size: iconSize,
+                            color: Colors.orange,
                           ),
                           "Çalışanlar",
                           Employees()),
@@ -191,8 +196,9 @@ class _HomeState extends State<Home> {
                       myBox(
                           context,
                           Icon(
-                            Icons.all_out,
+                            Icons.app_registration,
                             size: iconSize,
+                            color: Color(0xffa00000),
                           ),
                           "Veresiyeler",
                           Veresiye()),
@@ -251,6 +257,30 @@ Widget myBox2(
     double kasadaOlmasiGerekenTutar) {
   double size1 = MediaQuery.of(context).size.height / 30;
   double size2 = MediaQuery.of(context).size.height / 40;
+  var date = DateTime.now();
+  var gun;
+  switch (DateFormat('EEEE').format(date)) {
+    case 'Monday':
+      gun = 'Pazartesi';
+      break;
+    case 'Tuesday':
+      gun = 'Salı';
+      break;
+    case 'Wednesday':
+      gun = 'Çarşamba';
+      break;
+    case 'Thursday':
+      gun = 'Perşembe';
+      break;
+    case 'Friday':
+      gun = 'Cuma';
+      break;
+    case 'Saturday':
+      gun = 'Cumartesi';
+      break;
+    default:
+      gun = 'Pazar';
+  }
 
   return Container(
     decoration: BoxDecoration(
@@ -273,7 +303,7 @@ Widget myBox2(
               style: textStyle4,
             ),
             Text(
-              "Çarşamba",
+              gun,
               style: textStyle4,
             ),
           ],

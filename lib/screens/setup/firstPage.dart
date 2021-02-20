@@ -10,32 +10,13 @@ class FirstPage extends StatefulWidget {
 }
 
 class _FirstPageState extends State<FirstPage> {
-  final _nameController = TextEditingController();
   void nextPage(BuildContext cx) {
-    if (_nameController.text.isNotEmpty) {
-      Navigator.of(cx).push(
-        MaterialPageRoute(
-          builder: (_) {
-            return Categories(bakeryName: _nameController.text);
-          },
-        ),
-      );
-    } else
-      showAlertDialog(cx);
-  }
-
-  showAlertDialog(BuildContext context) {
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      content: Text("İşletme adı boş bırakılamaz."),
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
+    Navigator.of(cx).push(
+      MaterialPageRoute(
+        builder: (_) {
+          return Categories();
+        },
+      ),
     );
   }
 
@@ -71,7 +52,7 @@ class _FirstPageState extends State<FirstPage> {
                         ),
                       ),
                       subtitle: Text(
-                        "İşletmenizin adını girip alttaki butonuna tıklayarak fırınınızı oluşturmaya başlayabilirsiniz.",
+                        "Alttaki butonuna tıklayarak fırınınızı oluşturmaya başlayabilirsiniz.",
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 16,
@@ -79,23 +60,6 @@ class _FirstPageState extends State<FirstPage> {
                         ),
                       ),
                     ),
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  padding: EdgeInsets.only(left: 18, right: 5, bottom: 10),
-                  color: Colors.white70,
-                  child: TextField(
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      fontFamily: "Poppins",
-                    ),
-                    decoration: InputDecoration(labelText: 'İşletme adı :'),
-                    controller: _nameController,
-                    // onChanged: (val) {
-                    //   titleInput = val;
-                    // },
                   ),
                 ),
                 Container(

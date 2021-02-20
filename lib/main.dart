@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'screens/authenticate/sign_in.dart';
 import 'screens/home/bottom_bar_state.dart';
 import 'screens/service/service_main.dart';
@@ -54,8 +53,7 @@ class _MainScreenState extends State<MainScreen> {
 
     return StreamBuilder(
         stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, AsyncSnapshot<User> snapshot) {
-          ////print(length);
+        builder: (context, snapshot) {
           if (snapshot.hasData && snapshot.data != null) {
             // ignore: deprecated_member_use
             Firestore.instance
