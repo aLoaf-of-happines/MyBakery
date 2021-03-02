@@ -20,7 +20,6 @@ class Service extends StatefulWidget {
 }
 
 class _ServiceState extends State<Service> {
-  final AuthService _auth = AuthService();
   bool loading = false;
   Future<String> f;
   ServiceModel _service = ServiceModel();
@@ -48,7 +47,7 @@ class _ServiceState extends State<Service> {
     _dayRef = _service.dayReference.limitToLast(50);
 
     log(_dayRef.toString());
-    var _debtRef = DatabaseService('bakery').bakeryRef.child('child');
+    var _debtRef = DatabaseService.bakeryRef.child('child');
     updates = _dayRef.onChildChanged.listen((data) {
       if (data != null) {
         _service.updateByKey(data.snapshot.key, data.snapshot.value);
@@ -104,7 +103,7 @@ class _ServiceState extends State<Service> {
                         ),
                         onPressed: () async {
                           setState(() => loading = true);
-                          dynamic result = await _auth.signOut();
+                          dynamic result = await AuthService.signOut();
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(builder: (context) => SignIn()),

@@ -39,16 +39,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  DatabaseService service = DatabaseService('bakery');
-
   @override
   Widget build(BuildContext context) {
-    service.bakeryReference.onValue.listen((event) {
+    DatabaseService.bakeryReference.onValue.listen((event) {
       Map value = event.snapshot.value;
       setState(() {
         bakery = value;
       });
-      //print(value);
     });
 
     return StreamBuilder(
@@ -63,14 +60,10 @@ class _MainScreenState extends State<MainScreen> {
                 .get()
                 .then((DocumentSnapshot snapshot2) {
               Map x = snapshot2.data();
-              ////print(x);
-
               setState(() {
                 role = x["role"];
               });
             });
-
-            //print(bakery);
 
             if (role == "Yönetici" ||
                 role == "Yonetici" ||
@@ -78,43 +71,19 @@ class _MainScreenState extends State<MainScreen> {
                 role == "yonetici") {
               if (bakery == null) {
                 return FirstPage();
-              } else if (bakery != null) {
+              } else {
                 return BottomBarState();
               }
             } else if (role == "Tezgahtar" || role == "tezgahtar") {
-              if (bakery == null) {
-                return FirstPage();
-              } else if (bakery != null) {
-                return Tezgahtar();
-              }
+              return Tezgahtar();
             } else if (role == "Şoför" ||
                 role == "Soför" ||
                 role == "Şofor" ||
                 role == "Sofor") {
-              if (bakery == null) {
-                return FirstPage();
-              } else if (bakery != null) {
-                return Service();
-              }
+              return Service();
             }
           }
           return SignIn();
         });
-  }
-
-  // ignore: missing_return
-  String getRole(String docID) {
-    // ignore: deprecated_member_use
-    Firestore.instance
-        .collection('users')
-        // ignore: deprecated_member_use
-        .document(docID)
-        .get()
-        .then((DocumentSnapshot snapshot) {
-      Map x = snapshot.data();
-      //print(x["role"]);
-
-      return x["role"];
-    });
   }
 }

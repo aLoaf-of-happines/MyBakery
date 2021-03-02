@@ -13,19 +13,17 @@ class Markets extends StatefulWidget {
 }
 
 class _MarketsState extends State<Markets> {
-  DatabaseService sv;
   List<Market> marketList = [];
   void _addNewMarket(String prName, double prAmount) {
     final newMarket = Market(name: prName, debt: prAmount);
     setState(() {
-      sv.addMarket(newMarket);
+      DatabaseService.addMarket(newMarket);
       marketList.add(newMarket);
     });
   }
 
   _MarketsState(List<Market> markets) {
     marketList = markets;
-    sv = DatabaseService('bakery');
   }
 
   void _startAddNewMarket(BuildContext ctx) {
@@ -43,7 +41,7 @@ class _MarketsState extends State<Markets> {
 
   void deleteMarket(String name) {
     setState(() {
-      sv.deleteMarket(name);
+      DatabaseService.deleteMarket(name);
       marketList.removeWhere((pr) => pr.name == name);
     });
   }

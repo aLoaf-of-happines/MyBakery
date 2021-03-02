@@ -16,7 +16,6 @@ class Workers extends StatefulWidget {
 
 class _WorkersState extends State<Workers> {
   List<Worker> workerList = [];
-  DatabaseService sv;
   void _addNewWorker(String workerName, String workerMail, String gorevi) {
     int passwd = 0;
     for (var i = 0; i < 6; i++) {
@@ -30,14 +29,13 @@ class _WorkersState extends State<Workers> {
       password: passwd.toString(),
     );
     setState(() {
-      sv.addWorker(newWorker);
+      DatabaseService.addWorker(newWorker);
       workerList.add(newWorker);
     });
   }
 
   _WorkersState(List<Worker> workers) {
     workerList = workers;
-    sv = DatabaseService('bakery');
   }
 
   void _startAddNewWorker(BuildContext ctx) {
@@ -55,7 +53,7 @@ class _WorkersState extends State<Workers> {
 
   void deleteWorker(String name) {
     setState(() {
-      sv.deleteWorker(name);
+      DatabaseService.deleteWorker(name);
       workerList.removeWhere((wr) => wr.name == name);
     });
   }

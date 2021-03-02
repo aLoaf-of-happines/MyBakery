@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dart:ui';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
@@ -22,7 +21,6 @@ class ViewNotePage extends StatefulWidget {
 }
 
 class _ViewNotePageState extends State<ViewNotePage> {
-  DatabaseService service = DatabaseService();
 
   @override
   void initState() {
@@ -136,7 +134,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
 
   void handleSave() async {
     //print("save state: " + widget.currentNote.toMap().toString());
-    service.updateNote(widget.currentNote.id, widget.currentNote.toMap());
+    DatabaseService.updateNote(widget.currentNote.id, widget.currentNote.toMap());
     widget.triggerRefetch();
   }
 
@@ -184,7 +182,7 @@ class _ViewNotePageState extends State<ViewNotePage> {
                         fontWeight: FontWeight.w500,
                         letterSpacing: 1)),
                 onPressed: () async {
-                  service.deleteNote(widget.currentNote.id);
+                  DatabaseService.deleteNote(widget.currentNote.id);
                   widget.triggerRefetch();
                   Navigator.pop(context);
                   Navigator.pop(context);
@@ -322,7 +320,7 @@ class _ViewExpensePageState extends State<ViewExpensePage> {
 
   void handleSave() async {
     //print("uid: " + temp + "-----------------------");
-    service.updateExpense(
+    DatabaseService.updateExpense(
         widget.currentExpense.id, widget.currentExpense.toMap());
     widget.triggerRefetch();
   }
@@ -366,7 +364,7 @@ class _ViewExpensePageState extends State<ViewExpensePage> {
                 onPressed: () async {
                   // await NotesDatabaseService.db
                   //     .deleteExpenseInDB(widget.currentExpense);
-                  service.deleteExpense(widget.currentExpense.id);
+                  DatabaseService.deleteExpense(widget.currentExpense.id);
                   widget.triggerRefetch();
                   Navigator.pop(context);
                   Navigator.pop(context);
@@ -503,7 +501,7 @@ class _ViewVeresiyePageState extends State<ViewVeresiyePage> {
 
   void handleSave() async {
     // await NotesDatabaseService.db.updateVeresiyeInDB(widget.currentVeresiye);
-    service.updateVeresiye(
+    DatabaseService.updateVeresiye(
         widget.currentVeresiye.title, widget.currentVeresiye.toMap());
     widget.triggerRefetch();
   }
@@ -547,7 +545,7 @@ class _ViewVeresiyePageState extends State<ViewVeresiyePage> {
                 onPressed: () async {
                   // await NotesDatabaseService.db
                   //     .deleteVeresiyeInDB(widget.currentVeresiye);
-                  service.deleteVeresiye(widget.currentVeresiye.title);
+                  DatabaseService.deleteVeresiye(widget.currentVeresiye.title);
                   widget.triggerRefetch();
                   Navigator.pop(context);
                   Navigator.pop(context);

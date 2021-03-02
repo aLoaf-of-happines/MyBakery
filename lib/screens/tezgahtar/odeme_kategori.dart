@@ -22,7 +22,6 @@ class OdemeKategori extends StatefulWidget {
 }
 
 class _OdemeKategoriState extends State<OdemeKategori> {
-  DatabaseService service = DatabaseService('bakery');
 
   double sumPrice() {
     //print("wewewewewewewewewe:");
@@ -49,7 +48,7 @@ class _OdemeKategoriState extends State<OdemeKategori> {
     TextEditingController controller3 = TextEditingController();
 
     return StreamBuilder<Event>(
-      stream: service.categoryReference.child(widget.category).onValue,
+      stream: DatabaseService.categoryReference.child(widget.category).onValue,
       builder: (context, snapshot) {
         Map data = {};
         List item = [];

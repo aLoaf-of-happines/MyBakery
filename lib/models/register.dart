@@ -12,7 +12,6 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool loading = false;
 
@@ -87,8 +86,9 @@ class _RegisterState extends State<Register> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           setState(() => loading = true);
-                          dynamic result = await _auth
-                              .registerWithEmailAndPassword(email, password);
+                          dynamic result =
+                              await AuthService.registerWithEmailAndPassword(
+                                  email, password);
                           if (result == null) {
                             setState(() {
                               loading = false;

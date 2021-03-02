@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +28,6 @@ class _VeresiyeState extends State<Veresiye> {
   List<VeresiyeModel> veresiyeList = [];
   TextEditingController searchController = TextEditingController();
   bool isSearchEmpty = true;
-  DatabaseService service = DatabaseService();
 
   @override
   void initState() {
@@ -40,7 +38,7 @@ class _VeresiyeState extends State<Veresiye> {
   setVeresiyeFromDB() async {
     //print("Entered setVeresiye");
     veresiyeList.clear();
-    service.veresiyelerDataReference.once().then((DataSnapshot snapshot) {
+    DatabaseService.veresiyelerDataReference.once().then((DataSnapshot snapshot) {
       Map<dynamic, dynamic> map = snapshot.value;
       if (map != null) {
         map.forEach((key, values) {
@@ -210,7 +208,7 @@ class _VeresiyeState extends State<Veresiye> {
                     veresiye.content = ((double.parse(veresiye.content)) -
                             (double.parse(controller.value.text)))
                         .toString();
-                    service.updateVeresiye(veresiye.title, veresiye.toMap());
+                    DatabaseService.updateVeresiye(veresiye.title, veresiye.toMap());
                   }
                 });
                 Navigator.pop(context);
@@ -233,7 +231,7 @@ class _VeresiyeState extends State<Veresiye> {
                     veresiye.content = ((double.parse(veresiye.content)) +
                             (double.parse(controller.value.text)))
                         .toString();
-                    service.updateVeresiye(veresiye.title, veresiye.toMap());
+                    DatabaseService.updateVeresiye(veresiye.title, veresiye.toMap());
                   }
                 });
                 Navigator.pop(context);
@@ -287,7 +285,7 @@ class _VeresiyeState extends State<Veresiye> {
               new FlatButton(
                   child: new Text('Sil'),
                   onPressed: () {
-                    service.deleteVeresiye(veresiye.title);
+                    DatabaseService.deleteVeresiye(veresiye.title);
                     Navigator.of(context).pop();
                     setVeresiyeFromDB();
                   })

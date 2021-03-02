@@ -17,7 +17,6 @@ class ProductsIn extends StatefulWidget {
 }
 
 class _ProductsInState extends State<ProductsIn> {
-  DatabaseService service = DatabaseService('bakery');
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class _ProductsInState extends State<ProductsIn> {
             body: Container(),
           )
         : StreamBuilder<Event>(
-            stream: service.categoryReference.child(widget.category).onValue,
+            stream: DatabaseService.categoryReference.child(widget.category).onValue,
             builder: (context, snapshot) {
               Map data = {};
               List item = [];
@@ -215,7 +214,7 @@ class _ProductsInState extends State<ProductsIn> {
                   ),
                   onPressed: () {
                     setState(() {
-                      service.deleteProduct2(widget.category, productName);
+                      DatabaseService.deleteProduct2(widget.category, productName);
                     });
                     Navigator.pop(context);
                   },
@@ -244,9 +243,9 @@ class _ProductsInState extends State<ProductsIn> {
                     amount: double.parse(controller2.value.text));
                 setState(() {
                   if (val == 0) {
-                    service.addProduct(newProduct);
+                    DatabaseService.addProduct(newProduct);
                   } else {
-                    service.updateProduct(uid, newProduct);
+                    DatabaseService.updateProduct(uid, newProduct);
                   }
                 });
               }

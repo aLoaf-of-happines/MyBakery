@@ -25,8 +25,6 @@ class Odeme extends StatefulWidget {
 }
 
 class _OdemeState extends State<Odeme> {
-  DatabaseService service = DatabaseService('bakery');
-
   @override
   Widget build(BuildContext context) {
     final contextW = MediaQuery.of(context).size.width;
@@ -36,7 +34,7 @@ class _OdemeState extends State<Odeme> {
     final sizeH = contextH / 20;
 
     return StreamBuilder<Event>(
-      stream: service.categoryReference.onValue,
+      stream: DatabaseService.categoryReference.onValue,
       builder: (context, snapshot) {
         Map data = {};
         List item = [];

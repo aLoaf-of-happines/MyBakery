@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/screens/home/bottom_bar_state.dart';
+import 'package:flutter_my_bakery/services/auth.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
 
 import '../../models/Payer.dart';
@@ -13,19 +14,17 @@ class Payers extends StatefulWidget {
 }
 
 class _PayersState extends State<Payers> {
-  DatabaseService sv;
   List<Payer> payerList = [];
   void _addNewPayer(String prName, double prAmount) {
     final newPayer = Payer(name: prName, debt: prAmount);
     setState(() {
-      sv.addPayer(newPayer);
+      DatabaseService.addPayer(newPayer);
       payerList.add(newPayer);
     });
   }
 
   _PayersState(List<Payer> payers) {
     payerList = payers;
-    sv = DatabaseService('bakery');
   }
 
   void _startAddNewpayer(BuildContext ctx) {
@@ -43,7 +42,7 @@ class _PayersState extends State<Payers> {
 
   void deletePayer(String name) {
     setState(() {
-      sv.deletePayer(name);
+      DatabaseService.deletePayer(name);
       payerList.removeWhere((pr) => pr.name == name);
     });
   }
@@ -124,7 +123,7 @@ class _PayersState extends State<Payers> {
         // ignore: deprecated_member_use_from_same_package
         onPressed: () {
           // ignore: deprecated_member_use_from_same_package
-          sv.registerWorkers();
+          AuthService.registerWorkers();
           Navigator.push(
             context,
             MaterialPageRoute(builder: (context) => BottomBarState()),
