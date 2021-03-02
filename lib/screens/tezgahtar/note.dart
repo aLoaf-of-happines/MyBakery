@@ -28,7 +28,6 @@ class _NoteState extends State<Note> {
   List<NotesModel> notesList = [];
   TextEditingController searchController = TextEditingController();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
-  DatabaseService service = DatabaseService();
 
   bool isSearchEmpty = true;
 
@@ -41,7 +40,7 @@ class _NoteState extends State<Note> {
   setNotesFromDB() async {
     //print("Entered setNotes");
     notesList.clear();
-    service.dailyDataReference
+    DatabaseService.dailyDataReference
         .child(formatter.format(DateTime.now()))
         .child("notes")
         .once()

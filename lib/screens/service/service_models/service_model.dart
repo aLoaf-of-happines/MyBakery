@@ -13,7 +13,7 @@ class ServiceModel {
   var dayReference;
   ServiceModel() {
     dayReference =
-        DatabaseService('bakery').dailyDataReference.child(DateData.date);
+        DatabaseService.dailyDataReference.child(DateData.date);
   }
   void updateByKey(String key, String value) {
     switch (key) {
@@ -35,7 +35,7 @@ class ServiceModel {
 
   Future<String> local() async {
     log('test');
-    DataSnapshot snapshot = await DatabaseService('bakery').bakeryRef.once();
+    DataSnapshot snapshot = await DatabaseService.bakeryRef.once();
     if (snapshot.value != null) {
       var day = snapshot.value['dailyData'];
       if (day != null) {
@@ -80,8 +80,8 @@ class ServiceModel {
 
   Future<void> updateDb() async {
     final dayReference =
-        DatabaseService('bakery').dailyDataReference.child(DateData.date);
-    DatabaseService('bakery').bakeryRef.update({'debt': debt.toString()});
+        DatabaseService.dailyDataReference.child(DateData.date);
+    DatabaseService.bakeryRef.update({'debt': debt.toString()});
     dayReference.update({
       'delivered': delivered.toString(),
       'bayat': bayat.toString(),

@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/models/Worker.dart';
+import 'package:flutter_my_bakery/services/auth.dart';
 import 'package:flutter_my_bakery/services/databaseService.dart';
 import 'package:flutter_my_bakery/shared/constants.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
@@ -14,7 +15,6 @@ class Employees extends StatefulWidget {
 }
 
 class _EmployeesState extends State<Employees> {
-  DatabaseService service = DatabaseService('bakery');
 
   @override
   void initState() {
@@ -36,7 +36,7 @@ class _EmployeesState extends State<Employees> {
     TextEditingController controller3 = TextEditingController();
 
     return StreamBuilder<Event>(
-      stream: service.workersReference.onValue,
+      stream: DatabaseService.workersReference.onValue,
       builder: (context, snapshot) {
         Map data = {};
         List item = [];
@@ -236,7 +236,7 @@ class _EmployeesState extends State<Employees> {
                   ),
                   onPressed: () {
                     setState(() {
-                      service.deleteWorker(uid);
+                      DatabaseService.deleteWorker(uid);
                     });
                     Navigator.pop(context);
                   },
@@ -270,16 +270,16 @@ class _EmployeesState extends State<Employees> {
                         mail: controller3.value.text,
                         job: controller2.value.text,
                         password: passwd.toString());
-                    service.addWorker(newWorker);
+                    DatabaseService.addWorker(newWorker);
                     // ignore: deprecated_member_use_from_same_package
-                    service.registerWorkers();
+                    AuthService.registerWorkers();
                   } else {
                     final newWorker = Worker(
                         name: controller.value.text,
                         mail: controller3.value.text,
                         job: controller2.value.text,
                         password: passwd.toString());
-                    service.updateWorker(uid, newWorker);
+                    DatabaseService.updateWorker(uid, newWorker);
                   }
                 });
               }

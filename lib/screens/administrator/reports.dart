@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_datetime_picker/flutter_datetime_picker.dart';
-import 'package:flutter_my_bakery/services/databaseService.dart';
 import 'package:flutter_my_bakery/shared/constants.dart';
 import 'package:intl/intl.dart';
 
@@ -28,7 +27,6 @@ class Reports extends StatefulWidget {
 }
 
 class _ReportsState extends State<Reports> {
-  DatabaseService service = DatabaseService("bakery");
   DateFormat dateFormat1 = DateFormat("yyyy-MM-dd");
 
   @override

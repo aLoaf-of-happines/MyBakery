@@ -20,7 +20,7 @@ class _MarketlerState extends State<Marketler> {
   @override
   void initState() {
     super.initState();
-    _ref = DatabaseService('bakery').marketsReference.orderByChild('name');
+    _ref = DatabaseService.marketsReference.orderByChild('name');
   }
 
   @override

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/screens/authenticate/sign_in.dart';
+import 'package:flutter_my_bakery/screens/home/home.dart';
 import 'package:flutter_my_bakery/services/auth.dart';
-import 'package:flutter_my_bakery/services/databaseService.dart';
 import 'package:flutter_my_bakery/shared/loading.dart';
-import 'package:flutter_my_bakery/shared/states.dart' as states;
 
 class BottomBarState extends StatefulWidget {
   @override
@@ -11,18 +10,7 @@ class BottomBarState extends StatefulWidget {
 }
 
 class _BottomBarStateState extends State<BottomBarState> {
-  DatabaseService service = DatabaseService('bakery');
-  final AuthService _auth = AuthService();
   bool loading = false;
-
-  int _currentIndex = 0;
-  List<Widget> _children = states.children;
-
-  void onTappedBar(int index) {
-    setState(() {
-      _currentIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +23,6 @@ class _BottomBarStateState extends State<BottomBarState> {
                 "İslam Unlu Mamülleri",
                 style: TextStyle(fontFamily: "Poppins"),
               ),
-              centerTitle: true,
               backgroundColor: Colors.blueGrey,
               actions: <Widget>[
                 FlatButton.icon(
@@ -50,7 +37,7 @@ class _BottomBarStateState extends State<BottomBarState> {
                   ),
                   onPressed: () async {
                     setState(() => loading = true);
-                    dynamic result = await _auth.signOut();
+                    dynamic result = await AuthService.signOut();
                     Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => SignIn()),
@@ -64,7 +51,7 @@ class _BottomBarStateState extends State<BottomBarState> {
                 )
               ],
             ),
-            body: _children[_currentIndex],
+            body: Home(),
           );
   }
 }

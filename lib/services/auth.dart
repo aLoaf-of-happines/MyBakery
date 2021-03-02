@@ -1,10 +1,19 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'databaseService.dart';
+import 'package:mailer/mailer.dart';
+import 'package:mailer/smtp_server.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
+
 
 class AuthService {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
+
+  static final String username = 'aloafofhappiness@gmail.com';
+  static final String password = 'Aloafofhappiness+';
+  static final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // sign in with email&password
-  Future signInWithEmailAndPassword(String email, String password) async {
+  static Future signInWithEmailAndPassword(String email, String password) async {
     try {
       await _auth.signInWithEmailAndPassword(email: email, password: password);
       return "Signed in";
@@ -15,7 +24,7 @@ class AuthService {
   }
 
   // register with email&password
-  Future registerWithEmailAndPassword(String email, String password) async {
+  static Future registerWithEmailAndPassword(String email, String password) async {
     try {
       var x = await _auth.createUserWithEmailAndPassword(
           email: email, password: password);
@@ -28,12 +37,49 @@ class AuthService {
   }
 
   // sign out
-  Future signOut() async {
+  static Future signOut() async {
     try {
       return await _auth.signOut();
     } catch (e) {
       //print(e.toString());
       return null;
     }
+  }
+
+  @deprecated
+  static void registerWorkers() {
+    DatabaseService.workersReference.once().then((DataSnapshot snapshot) {
+      final smtpServer = gmail(username, password);
+      Map map = snapshot.value;
+      map.forEach((key, value) async {
+        var check = await registerWithEmailAndPassword(
+            value['mail'], value['passwd']);
+
+        if (check != null) {
+          await Firestore.instance
+              .collection('users')
+              .document(check)
+              .setData({'userid': check, 'role': value['job']});
+        }
+
+        if (check != null) {
+          final message = Message()
+            ..from = Address(username, 'a Loaf of Happiness')
+            ..recipients.add(value['mail'])
+            ..subject = 'Login'
+            ..html = "<p>My Bakery giriş şifreniz: ${value['passwd']}</p>";
+
+          try {
+            await send(message, smtpServer);
+            //print('Message sent: ' + sendReport.toString());
+          } on MailerException catch (e) {
+            //print('Message not sent.');
+            for (var p in e.problems) {
+              print('Problem: ${p.code}: ${p.msg}');
+            }
+          }
+        }
+      });
+    });
   }
 }

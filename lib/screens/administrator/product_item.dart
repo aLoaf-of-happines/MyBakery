@@ -15,10 +15,9 @@ class ProductItem extends StatefulWidget {
 }
 
 class ProductItemState extends State<ProductItem> {
-  DatabaseService service = DatabaseService('bakery');
   void goProduct(BuildContext cx) async {
     List<Product> liste = [];
-    await service.categoryReference
+    await DatabaseService.categoryReference
         .child(widget.name)
         .once()
         .then((DataSnapshot snapshot) {

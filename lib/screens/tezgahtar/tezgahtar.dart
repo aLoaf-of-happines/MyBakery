@@ -15,7 +15,6 @@ class Tezgahtar extends StatefulWidget {
 }
 
 class _TezgahtarState extends State<Tezgahtar> {
-  final AuthService _auth = AuthService();
   bool loading = false;
 
   int seciliSayfa = 0;
@@ -50,7 +49,7 @@ class _TezgahtarState extends State<Tezgahtar> {
                   ),
                   onPressed: () async {
                     setState(() => loading = true);
-                    dynamic result = await _auth.signOut();
+                    dynamic result = await AuthService.signOut();
                     Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => SignIn()), (route) => false);
                     if (result == null) {
                       setState(() {

@@ -19,9 +19,7 @@ class Sepet extends StatefulWidget {
 
 class _SepetState extends State<Sepet> {
   double sumPrice() {
-    //print("QQQQQQQQQQQQQQQQQQQQQQQQQQQQ: " + widget.price.length.toString());
     if (widget.price.length == 0) {
-      // //print("0 dönmüş olmalı\nwwwwwwwwwwwwwwwwwwwwwwwwwwww: " + (price == null).toString());
       return 0;
     }
     double sum = 0;
@@ -30,8 +28,6 @@ class _SepetState extends State<Sepet> {
     }
     return sum;
   }
-
-  DatabaseService service = DatabaseService();
 
   void goTezgahtar(BuildContext cx) {
     setState(() {
@@ -159,7 +155,7 @@ class _SepetState extends State<Sepet> {
               ),
               RawMaterialButton(
                 onPressed: () {
-                  if (product.isNotEmpty) confirmationPopup2(context, service);
+                  if (product.isNotEmpty) confirmationPopup2(context, DatabaseService());
                 },
                 elevation: 2.0,
                 fillColor: Colors.green,
@@ -386,7 +382,7 @@ class _SepetState extends State<Sepet> {
                   'Ödeme Yöntemi': 'Kredi Kartı',
                   'Toplam Alınan Ücret': sumPrice()
                 });
-                service.addTx(res);
+                DatabaseService.addTx(res);
                 goTezgahtar(context);
               },
               child: Row(
@@ -418,7 +414,7 @@ class _SepetState extends State<Sepet> {
                   'Ödeme Yöntemi': "Nakit Ödeme",
                   'Toplam Alınan Ücret': sumPrice()
                 });
-                service.addTx(res);
+                DatabaseService.addTx(res);
                 goTezgahtar(context);
               },
               child: Row(
@@ -452,7 +448,7 @@ class _SepetState extends State<Sepet> {
                   'Ödeme Yöntemi': "Veresiye",
                   'Toplam Alınan Ücret': sumPrice()
                 });
-                service.addTx(res);
+                DatabaseService.addTx(res);
                 goVeresiye(context);
               },
               child: Row(

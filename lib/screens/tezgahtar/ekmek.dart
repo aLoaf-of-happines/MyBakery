@@ -26,8 +26,6 @@ class _EkmekState extends State<Ekmek> {
   final DateFormat formatter2 = DateFormat('yyyy-MM-dd - kk:mm');
   List<EkmekModel> ekmekList = [];
   GlobalKey<FormState> _key = new GlobalKey();
-
-  DatabaseService service = DatabaseService();
   bool isSearchEmpty = true;
 
   @override
@@ -40,7 +38,7 @@ class _EkmekState extends State<Ekmek> {
   setEkmekFromDB() async {
     ekmekList.clear();
     ////print("Entered setEkmek");
-    service.dailyDataReference
+    DatabaseService.dailyDataReference
         .child(formatter.format(DateTime.now()))
         .child("producedBreads")
         .once()
@@ -174,7 +172,7 @@ class _EkmekState extends State<Ekmek> {
                     ekmek.amount =
                         (int.parse(controller.value.text)).toString();
                     ekmek.time = formatter2.format(DateTime.now());
-                    service.addEkmek(ekmek.id, ekmek.toMap());
+                    DatabaseService.addEkmek(ekmek.id, ekmek.toMap());
                   }
                 });
                 Navigator.pop(context);
@@ -199,7 +197,7 @@ class _EkmekState extends State<Ekmek> {
               new FlatButton(
                   child: new Text('Sil'),
                   onPressed: () {
-                    service.deleteEkmek(ekmek.id);
+                    DatabaseService.deleteEkmek(ekmek.id);
                     Navigator.of(context).pop();
                     setEkmekFromDB();
                   })

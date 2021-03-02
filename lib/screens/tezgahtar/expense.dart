@@ -25,7 +25,6 @@ class _ExpenseState extends State<Expense> {
   List<ExpensesModel> expensesList = [];
   TextEditingController searchController = TextEditingController();
   final DateFormat formatter = DateFormat('yyyy-MM-dd');
-  DatabaseService service = DatabaseService();
 
   @override
   void initState() {
@@ -40,7 +39,7 @@ class _ExpenseState extends State<Expense> {
     // setState(() {
     //   expensesList = fetchedExpenses;
     // });
-    service.dailyDataReference
+    DatabaseService.dailyDataReference
         .child(formatter.format(DateTime.now()))
         .child("expenses")
         .once()

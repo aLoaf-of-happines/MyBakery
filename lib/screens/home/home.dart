@@ -15,7 +15,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  DatabaseService service = DatabaseService("bakery");
   DateFormat dateFormat1 = DateFormat("yyyy-MM-dd");
 
   int toplamCikanEkmek = 0;
@@ -28,10 +27,9 @@ class _HomeState extends State<Home> {
 
   @override
   Widget build(BuildContext context) {
-    int sum = 0;
-
     String currentTime = dateFormat1.format(DateTime.now());
-    service.bakeryRef
+    int sum = 0;
+    DatabaseService.bakeryRef
         .child("dailyData")
         .child(currentTime)
         .child("producedBreads")
@@ -55,7 +53,7 @@ class _HomeState extends State<Home> {
       });
     });
 
-    service.bakeryRef
+    DatabaseService.bakeryRef
         .child("dailyData")
         .child(currentTime)
         .onValue
@@ -72,7 +70,7 @@ class _HomeState extends State<Home> {
       }
     });
 
-    service.bakeryRef
+    DatabaseService.bakeryRef
         .child("dailyData")
         .child(currentTime)
         .child("tx")
@@ -299,7 +297,7 @@ Widget myBox2(
               height: size1 / 2,
             ),
             Text(
-              "\₺ " + kasadaOlmasiGerekenTutar.toInt().toString(),
+              "\₺ " + kasadaOlmasiGerekenTutar.toString(),
               style: textStyle4,
             ),
             Text(

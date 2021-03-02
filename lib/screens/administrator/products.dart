@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_my_bakery/models/Category.dart';
 import 'package:flutter_my_bakery/screens/administrator/product_item.dart';
-import 'package:flutter_my_bakery/services/databaseService.dart';
 
 String uid;
 
@@ -11,7 +10,6 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
-  DatabaseService service = DatabaseService('bakery');
 
   @override
   void initState() {
